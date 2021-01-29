@@ -11,11 +11,10 @@ console.log(`Welcome to ${bankName} ATM Terminal`);
 atm.valid();
 
 function operationToPerform() {
-  let choice = Number(
-    prompt(
-      `What operation would you like to perform today?\n\nEnter:\n1 to Check Balance\n2 to Withdraw\n3 to Deposit\n4 to Exit\n`
-    )
+  console.log(
+    `What operation would you like to perform today?\n\nEnter:\n1 to Check Balance\n2 to Withdraw\n3 to Deposit\n4 to Exit\n`
   );
+  let choice = Number(prompt());
   return choice;
 }
 
@@ -48,9 +47,10 @@ function performOperation() {
 performOperation();
 
 function reprompt() {
-  let response = prompt(
+  console.log(
     `Would you like to perform another transaction? Enter:\n1 for yes\n2 for no\n`
   );
+  let response = prompt();
   if (response == 2) {
     console.log(`Thank you for using ${bankName}. Have a nice day!`);
   } else {

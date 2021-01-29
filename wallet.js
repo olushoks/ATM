@@ -1,6 +1,6 @@
 "use strict";
-let dispensableCash = 10000;
+let cashInVault = 50000;
 
 module.exports = {
-  availableCash: dispensableCash,
+  availableCash: cashInVault,
 };

@@ -6,7 +6,8 @@ const wallet = require("./wallet");
 
 // function to request and valid pin
 function validatePin() {
-  let enteredPin = Number(prompt(`Enter your PIN to continue\n`));
+  console.log(`Enter your PIN to continue\n`);
+  let enteredPin = Number(prompt());
   if (enteredPin === account.pin) {
     console.log(`Success!\n----`);
   } else if (enteredPin !== account.pin) {
@@ -21,9 +22,8 @@ function getBalance() {
 
 // function for withdrawals
 function withdraw() {
-  let amountToWithdraw = Number(
-    prompt(`How much would you like to withdraw today?\n$`)
-  );
+  console.log(`How much would you like to withdraw today?\n`);
+  let amountToWithdraw = Number(prompt("$"));
 
   if (wallet.availableCash <= 0) {
     // Wallet has no cash to dispense
@@ -57,9 +57,9 @@ function withdraw() {
 
 // function to deposit
 function deposit() {
-  let amountToDeposit = Number(
-    prompt(`--> Enter the amount you like to deposit today\n$`)
-  );
+  console.log(`--> Enter the amount you like to deposit today\n`);
+  let amountToDeposit = Number(prompt("$"));
+
   if (amountToDeposit <= 0) {
     console.log(`--> Please enter an amount greater than $0.00`);
     deposit();
