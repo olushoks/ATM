@@ -24,17 +24,35 @@ function withdraw() {
   let amountToWithdraw = Number(
     prompt(`How much would you like to withdraw today?\n$`)
   );
-  if (amountToWithdraw > account.balance) {
+
+  if (wallet.availableCash <= 0) {
+    // Wallet has no cash to dispense
+    console.log(
+      `‽--> This machine is temporarily unable to dispense cash\nPlease try again later!`
+    );
+  } else if (amountToWithdraw > wallet.availableCash) {
+    // user s tryinig to withdraw more than available cash in wallet
+    console.log(
+      `‽--> This machine is currently unable to dispense that amount.\nPlease enter a lesser amount:\n`
+    );
+    withdraw();
+  } else if (amountToWithdraw <= 0) {
+    //user is enterinig an amount less than 0
+    console.log(`‽--> Please enter amount greater than $0.00:\n`);
+    withdraw();
+  } else if (amountToWithdraw > account.balance) {
+    //user trying to wiithdrawn more than their balance
     console.log(
       `‽--> You do not have sufficent funds to withdraw this amount.\nPlease  enter a lesser amount:\n`
     );
     withdraw();
   } else {
+    // Enough cash both in wallet and users account
+    wallet.availableCash -= amountToWithdraw;
     account.balance -= amountToWithdraw;
     console.log(`--> Please take your cash!\n----`);
     console.log(`You new balance is $${account.balance}\n----`);
   }
-  return wallet.allWithdrawals.push(amountToWithdraw);
 }
 
 // function to deposit
@@ -46,30 +64,10 @@ function deposit() {
     console.log(`--> Please enter an amount greater than $0.00`);
     deposit();
   } else {
+    wallet.availableCash += amountToDeposit;
     account.balance += amountToDeposit;
-    // account.balance = currentBalance;
     console.log(`Transaction succesful`);
     console.log(`You new balance is $${account.balance}\n----`);
-  }
-  return wallet.allDeposit.push(amountToDeposit);
-}
-
-function checkWallet() {
-  let choice = Number(
-    prompt(
-      `Would you like to check your deposits wallet or withdrawals wallet?\n1 for Deposits\n2 for Withdrawals\n`
-    )
-  );
-  if (choice === 1) {
-    let deposit = wallet.allDeposit.reduce((total, el) => total + el, 0);
-    console.log(`Your deposit(s) so far:\n${wallet.allDeposit.join("$\n")}`);
-    console.log(`Your Total Deposit is: $${deposit}`);
-  } else if (choice === 2) {
-    let withdrawal = wallet.allWithdrawals.reduce((total, el) => total + el, 0);
-    console.log(
-      `Your withdrawals so far:\n${wallet.allWithdrawals.join("\n")}`
-    );
-    console.log(`Your Total Withdrawals is: $${withdrawal}`);
   }
 }
 
@@ -77,6 +75,5 @@ module.exports = {
   balance: getBalance,
   withdraw: withdraw,
   deposit: deposit,
-  wallet: checkWallet,
   valid: validatePin,
 };

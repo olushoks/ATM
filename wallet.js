@@ -1,7 +1,6 @@
-let withdrawals = [];
-let deposits = [];
+"use strict";
+let dispensableCash = 10000;
 
 module.exports = {
-  allWithdrawals: withdrawals,
-  allDeposit: deposits,
+  availableCash: dispensableCash,
 };

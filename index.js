@@ -13,7 +13,7 @@ atm.valid();
 function operationToPerform() {
   let choice = Number(
     prompt(
-      `What operation would you like to perform today?\n\nEnter:\n1 to Check Balance\n2 to Withdraw\n3 to Deposit\n4 To Check Wallet\n5 to Exit\n`
+      `What operation would you like to perform today?\n\nEnter:\n1 to Check Balance\n2 to Withdraw\n3 to Deposit\n4 to Exit\n`
     )
   );
   return choice;
@@ -37,11 +37,7 @@ function performOperation() {
       atm.deposit();
       reprompt();
       break;
-    case 4: //wallet
-      atm.wallet();
-      reprompt();
-      break;
-    case 5: //exit
+    case 4: //exit
       console.log(`Goodbye!`);
       return;
     default:
